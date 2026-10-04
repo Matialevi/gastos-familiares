@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#203d35"><title>Gastos Familiares</title>
+  <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg"><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="toast" class="toast" role="status"></div>
+  <main id="loginView" class="login-view login-minimal">
+    <section id="loginIntro" class="login-intro">
+      <div class="login-glow"></div><span class="intro-symbol">$</span>
+      <h1>Gasto familiar</h1>
+      <button id="startLogin" class="start-login">Iniciar sesión <span>→</span></button>
+    </section>
+    <section id="loginPanel" class="login-panel login-panel-hidden">
+      <form id="loginForm" class="login-card">
+        <button id="backToIntro" class="login-back" type="button">← Volver</button>
+        <div><p class="eyebrow green">ACCESO FAMILIAR</p><h2>Hola de nuevo</h2><p class="muted">Ingresá con tu cuenta personal.</p></div>
+        <label>Email<input id="email" type="email" autocomplete="email" placeholder="tu@email.com" required></label>
+        <label>Contraseña<div class="password-wrap"><input id="password" type="password" autocomplete="current-password" placeholder="••••••••" minlength="6" required><button type="button" id="showPassword" aria-label="Mostrar contraseña">○</button></div></label>
+        <button class="primary wide" type="submit"><span>Entrar</span><span>→</span></button>
+        <button class="demo-link" id="demoButton" type="button">Ver demo sin iniciar sesión</button>
+        <p id="configHint" class="config-hint">Conectá Supabase para iniciar sesión con datos reales.</p>
+      </form>
+    </section>
+  </main>
+
+  <div id="appView" class="app-view hidden">
+    <header class="topbar"><div class="brand brand-dark"><span class="brand-mark">⌂</span><span>Gastos<br>Familiares</span></div><div class="header-actions"><button class="icon-btn" aria-label="Notificaciones">♢<i></i></button><button id="profileButton" class="avatar">M</button></div></header>
+    <main id="homeView" class="dashboard app-section">
+      <section class="hello"><div><p id="todayLabel" class="eyebrow green"></p><h1>Hola, <span id="userName">Mati</span> <span class="wave">✦</span></h1><p class="muted">Así vienen las cuentas de casa.</p></div><button id="monthButton" class="month-button">Este mes <span>⌄</span></button></section>
+      <section class="personal-total-card"><div class="personal-main"><p class="card-label">TU GASTO · ESTE MES</p><h2 id="personalTotal">$ 156.800</h2><p class="delta">Lo que llevás registrado personalmente</p></div><div class="family-total-small"><span>GASTO DEL GRUPO FAMILIAR</span><strong id="monthTotal">$ 428.650</strong><small id="movementCount">4 movimientos cargados</small></div><div class="total-orbit"><i></i><b>$</b></div></section>
+      <section class="content-grid">
+        <article class="panel chart-panel"><div class="section-head"><div><p class="eyebrow electric">COMPARATIVA</p><h3>Distribución familiar</h3></div><button class="more">•••</button></div><div id="chart" class="chart"></div><div id="legend" class="legend"></div></article>
+        <article class="panel movements-panel"><div class="section-head"><div><p class="eyebrow coral">ACTIVIDAD RECIENTE</p><h3>Últimos movimientos</h3></div><button class="text-button">Ver todos →</button></div><div id="movements"></div></article>
+      </section>
+    </main>
+    <main id="movementsView" class="dashboard app-section hidden"><section class="page-title"><div><p class="eyebrow electric">HISTORIAL</p><h1>Movimientos</h1><p class="muted">Todos los gastos de la familia, en un solo lugar.</p></div><input id="movementSearch" class="search-input" type="search" placeholder="Buscar comercio o persona…"></section><section class="panel full-list" id="allMovements"></section></main>
+    <main id="summaryView" class="dashboard app-section hidden"><section class="page-title"><div><p class="eyebrow electric">EVOLUCIÓN</p><h1>Resumen</h1><p class="muted">Cómo fueron cambiando los gastos familiares.</p></div></section><section class="panel timeline-panel"><div class="summary-toolbar"><div><h3>Gastos en el tiempo</h3><p id="summaryTotal" class="muted"></p></div><div class="period-tabs"><button data-period="week">Semana</button><button class="active" data-period="month">Mes</button><button data-period="year">Año</button></div></div><div id="timelineChart" class="timeline-chart"></div></section></main>
+    <main id="profileView" class="dashboard app-section hidden"><section class="profile-page panel"><span id="profileAvatar" class="profile-avatar">M</span><p class="eyebrow electric">MI CUENTA</p><h1 id="profileName">Mati</h1><p class="muted">Integrante de Gastos Familiares</p><button id="logoutButton" class="logout-button">Cerrar sesión</button></section></main>
+    <button id="addExpenseButton" class="fab"><b>＋</b><span>Gasto</span></button>
+    <nav class="bottom-nav"><button class="active" data-view="homeView">⌂<span>Inicio</span></button><button data-view="movementsView">▥<span>Movimientos</span></button><button data-view="summaryView">◎<span>Resumen</span></button><button id="navProfile" data-view="profileView">○<span>Perfil</span></button></nav>
+  </div>
+
+  <div id="expenseModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="expenseTitle">
+    <div class="scrim" data-close></div><section class="sheet"><div class="sheet-handle"></div><header><button class="back-btn" data-close>←</button><div><p class="eyebrow coral">NUEVO MOVIMIENTO</p><h2 id="expenseTitle">Cargar gasto</h2></div><button class="close-btn" data-close>×</button></header>
+      <form id="expenseForm">
+        <label class="amount-label">¿Cuánto gastaron?<div class="amount-input"><span>$</span><input id="amount" inputmode="decimal" placeholder="0" required></div></label>
+        <label>Comercio o concepto<input id="merchant" type="text" placeholder="Ej. Carrefour, luz, farmacia…" required></label>
+        <div id="suggestion" class="suggestion hidden"><span>✦</span><div><small>SUGERENCIA AUTOMÁTICA</small><b id="suggestionText"></b></div><button type="button" id="editCategory">Cambiar</button></div>
+        <div class="two-cols"><label>¿Quién pagó?<select id="paidBy"><option>Matías</option><option>Giselle</option><option>Iara</option><option>Milagros</option></select></label><label>Fecha<input id="expenseDate" type="date" required></label></div>
+        <fieldset><legend>Ámbito</legend><div class="scope-grid"><label><input type="radio" name="scope" value="Casa" checked><span>⌂<b>Casa</b></span></label><label><input type="radio" name="scope" value="Compartido"><span>♢<b>Compartido</b></span></label><label><input type="radio" name="scope" value="Personal"><span>○<b>Personal</b></span></label><label><input type="radio" name="scope" value="Otro"><span>＋<b>Otro</b></span></label></div></fieldset>
+        <div id="categoryFields" class="two-cols category-fields hidden"><label>Categoría<select id="category"><option>Comida</option><option>Servicios</option><option>Salud</option><option>Transporte</option><option>Educación</option><option>Otros</option></select></label><label>Subcategoría<input id="subcategory" placeholder="Ej. Supermercado"></label></div>
+        <button class="primary wide save" type="submit"><span>Guardar gasto</span><span>→</span></button>
+      </form>
+    </section>
+  </div>
+  <script src="config.js" onerror="this.remove()"></script><script src="app.js"></script>
+</body></html>
