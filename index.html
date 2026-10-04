@@ -45,8 +45,8 @@
   <div id="expenseModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="expenseTitle">
     <div class="scrim" data-close></div><section class="sheet"><div class="sheet-handle"></div><header><button class="back-btn" data-close>←</button><div><p class="eyebrow coral">NUEVO MOVIMIENTO</p><h2 id="expenseTitle">Cargar gasto</h2></div><button class="close-btn" data-close>×</button></header>
       <form id="expenseForm">
-        <label class="amount-label">¿Cuánto gastaron?<div class="amount-input"><span>$</span><input id="amount" inputmode="decimal" placeholder="0" required></div></label>
-        <label>Comercio o concepto<input id="merchant" type="text" placeholder="Ej. Carrefour, luz, farmacia…" required></label>
+        <label class="amount-label">¿Cuánto gastaron?<div class="amount-input"><span>$</span><input id="amount" inputmode="numeric" placeholder="0" required></div></label>
+        <label>Comercio o concepto<input id="merchant" type="text" placeholder="Ej. Coto, luz, farmacia…" required></label>
         <div id="suggestion" class="suggestion hidden"><span>✦</span><div><small>SUGERENCIA AUTOMÁTICA</small><b id="suggestionText"></b></div><button type="button" id="editCategory">Cambiar</button></div>
         <div class="two-cols"><label>¿Quién pagó?<select id="paidBy"><option>Matías</option><option>Giselle</option><option>Iara</option><option>Milagros</option></select></label><label>Fecha<input id="expenseDate" type="date" required></label></div>
         <fieldset><legend>Ámbito</legend><div class="scope-grid"><label><input type="radio" name="scope" value="Casa" checked><span>⌂<b>Casa</b></span></label><label><input type="radio" name="scope" value="Compartido"><span>♢<b>Compartido</b></span></label><label><input type="radio" name="scope" value="Personal"><span>○<b>Personal</b></span></label><label><input type="radio" name="scope" value="Otro"><span>＋<b>Otro</b></span></label></div></fieldset>

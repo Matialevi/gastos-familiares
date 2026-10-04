@@ -45,3 +45,4 @@ body{background:radial-gradient(circle at 70% 0,rgba(105,116,194,.13),transparen
 @media(max-width:780px){.page-title{display:grid;gap:18px}.page-title h1{font-size:2.2rem}.search-input{width:100%}.full-list{padding:9px 17px}.timeline-panel{padding:20px 15px}.summary-toolbar{display:grid}.period-tabs{width:100%;display:grid;grid-template-columns:repeat(3,1fr)}.timeline-chart{height:265px;gap:4px;overflow:hidden}.time-column i{width:min(25px,76%)}.time-column span{display:none}.profile-page{margin:15px auto;padding:38px 20px}}
 
 @media(max-width:780px){input,select,textarea{font-size:16px}button,a{touch-action:manipulation}}
+.suggestion button{color:#71ddcd;text-decoration-color:rgba(113,221,205,.5)}
