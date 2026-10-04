@@ -22,6 +22,7 @@ const rules=[
 
 function toast(text){const el=$('#toast'); el.textContent=text; el.classList.add('show'); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove('show'),2600)}
 function supabase(path, options={}){return fetch(`${config.supabaseUrl}${path}`,{...options,headers:{apikey:config.supabaseAnonKey,Authorization:`Bearer ${localStorage.getItem('gf_token') || config.supabaseAnonKey}`,'Content-Type':'application/json',...(options.headers||{})}}).then(async r=>{const body=await r.json().catch(()=>({}));if(!r.ok)throw new Error(body.msg||body.message||body.error_description||'No se pudo completar la operación');return body})}
+async function restoreSession(){const refresh=localStorage.getItem('gf_refresh');if(!refresh||!configured)return;try{let user;try{user=await supabase('/auth/v1/user')}catch{const renewed=await supabase('/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{Authorization:`Bearer ${config.supabaseAnonKey}`},body:JSON.stringify({refresh_token:refresh})});localStorage.setItem('gf_token',renewed.access_token);localStorage.setItem('gf_refresh',renewed.refresh_token);user=renewed.user}const label=await loadRemoteData(user);openApp(label)}catch{localStorage.removeItem('gf_token');localStorage.removeItem('gf_refresh')}}
 async function loadRemoteData(user){
   const [members,categories,subcategories,providers,expenses]=await Promise.all([
     supabase('/rest/v1/miembros?select=*&activo=eq.true'),supabase('/rest/v1/categorias?select=*&activo=eq.true'),supabase('/rest/v1/subcategorias?select=*&activo=eq.true'),supabase('/rest/v1/proveedores?select=*&activo=eq.true'),supabase('/rest/v1/gastos?select=*&order=fecha.desc,created_at.desc&limit=1000')
@@ -73,3 +74,4 @@ $('#expenseForm').onsubmit=async e=>{e.preventDefault();const amount=Number($('#
 };
 $('#logoutButton').onclick=()=>{if(state.demo)return location.reload();localStorage.removeItem('gf_token');localStorage.removeItem('gf_refresh');location.reload()};
 if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(()=>{});
+restoreSession();
