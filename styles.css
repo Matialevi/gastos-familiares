@@ -46,3 +46,5 @@ body{background:radial-gradient(circle at 70% 0,rgba(105,116,194,.13),transparen
 
 @media(max-width:780px){input,select,textarea{font-size:16px}button,a{touch-action:manipulation}}
 .suggestion button{color:#71ddcd;text-decoration-color:rgba(113,221,205,.5)}
+.full-list .movement{grid-template-columns:42px 1fr auto 34px}.delete-expense{width:31px;height:31px;border:1px solid #485165;border-radius:9px;background:transparent;color:#aab2c2;font-size:1.15rem}.delete-expense:hover{border-color:#ef7967;color:#ef7967}
+.remember-provider{grid-template-columns:22px 1fr;align-items:start;padding:14px;border:1px solid #343d50;border-radius:12px;background:#181d28}.remember-provider input{width:18px;height:18px;margin:1px 0}.remember-provider b,.remember-provider small{display:block}.remember-provider small{margin-top:3px;color:var(--muted);font-weight:400}
