@@ -58,7 +58,6 @@ function showLoginForm(){const intro=$('#loginIntro');intro.classList.add('launc
 $('#startLogin').onclick=showLoginForm;
 $('#backToIntro').onclick=()=>{$('#loginView').classList.remove('form-open');$('#loginPanel').classList.add('login-panel-hidden');$('#loginIntro').classList.remove('launching')};
 $('#showPassword').onclick=()=>{const p=$('#password');p.type=p.type==='password'?'text':'password'};
-$('#demoButton').onclick=()=>openApp();
 $('#movementSearch').oninput=e=>renderAllMovements(e.target.value);
 $$('.period-tabs button').forEach(button=>button.onclick=()=>{$$('.period-tabs button').forEach(b=>b.classList.remove('active'));button.classList.add('active');renderTimeline(button.dataset.period)});
 $$('.bottom-nav button').forEach(button=>button.onclick=()=>showView(button.dataset.view));
