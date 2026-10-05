@@ -14,6 +14,7 @@ const state = {
 };
 const rules=[
   {test:/\b(coto|supermercado|pampero)\b/i,cat:'Comida',sub:'Supermercado'},
+  {test:/\b(cafe|café|cafeteria|cafetería)\b/i,cat:'Comida',sub:'Cafetería'},
   {test:/^(ml|mercado\s*libre)$/i,cat:'Otros',sub:'Otros',display:'ML'},
   {test:/edenor|edesur|metrogas|aysa|internet|movistar|personal/i,cat:'Servicios',sub:'Servicios del hogar'},
   {test:/flow|cablevision|fibertel/i,cat:'Servicios',sub:'Internet'},
